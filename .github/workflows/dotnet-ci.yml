@@ -2,15 +2,17 @@ name: TestFlow CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
-  jobs:
-    build:
-      runs-on: ubuntu-latest
-      
-      steps:
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -27,4 +29,3 @@ on:
 
       - name: Run tests
         run: dotnet test TestFlow.sln --no-build --configuration Release
-        
