@@ -67,4 +67,29 @@ public class PermissionServiceTests
 
         Assert.False(result);
     }
+
+    
+    [Fact]
+    public void CanReview_WhenReviewerIsNull_ThrowsArgumentNullException()
+    {
+        var employeeBeingReviewed = new Employee
+        {
+            Level = EmployeeLevel.E3
+        };
+
+        Assert.Throws<ArgumentNullException>(() =>
+            _permissionService.CanReview(null!, employeeBeingReviewed));
+    }
+
+    [Fact]
+    public void CanReview_WhenEmployeeBeingReviewedIsNull_ThrowsArgumentNullException()
+    {
+        var reviewer = new Employee
+        {
+            Level = EmployeeLevel.E5
+        };
+
+        Assert.Throws<ArgumentNullException>(() =>
+            _permissionService.CanReview(reviewer, null!));
+    }
 }
